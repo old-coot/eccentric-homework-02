@@ -7,21 +7,22 @@ public class PlayerMove : MonoBehaviour
 {
     public float Speed;
     public float RoatationSpeed;
+    private int _speedMultiplier = 1;
 
     void Update()
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector3 offset = new Vector3(h, 0, v) * Speed * Time.deltaTime;
+        _speedMultiplier = Input.GetKey(KeyCode.LeftShift) ? 3 : 1;
+        
+        Vector3 offset = new Vector3(h, 0, v) * Speed * Time.deltaTime * _speedMultiplier;
         transform.Translate(offset);
 
         float yRotation = Input.GetAxis("Mouse X");
         
-        Debug.Log(yRotation);
         transform.Rotate(0, -yRotation * RoatationSpeed *Time.deltaTime, 0);
-        
-        // if (Input.GetKeyDown())
+
         
         
     }
